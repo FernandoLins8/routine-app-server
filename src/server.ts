@@ -4,6 +4,7 @@ import 'express-async-errors';
 import cors from 'cors'
 import router from './routes'
 import AppError from "./errors/AppError";
+
 const app = express()
 
 app.use(cors())
