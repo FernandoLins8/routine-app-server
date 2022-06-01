@@ -16,28 +16,56 @@ model User {
   username String
   password String
 
-  Day Day[]
+  routines Routine[]
+
   @@map("user")
 }
 
-model Day {
-  id      String  @id @default(uuid())
-  name    String?
+// Routines represent a user day (24h)
+// They're composed of 30 min units that can be marked with labels
+model Routine {
+  id         String   @id @default(uuid())
+  name       String?
+  created_at DateTime @default(now())
+
   user_id String
 
-  user    User      @relation(fields: [user_id], references: [id])
-  Section Section[]
-  @@map("day")
+  user   User    @relation(fields: [user_id], references: [id])
+  units  Unit[]
+  labels Label[]
+
+  @@map("routine")
 }
 
-model Section {
+// A Label is a name (and color)
+// They can be used to set an activity like "programming" to any time of a Routine
+// They group together "Units"
+model Label {
+  id         String @id @default(uuid())
+  name       String
+  color      String
+  routine_id String
+
+  routine Routine @relation(fields: [routine_id], references: [id])
+  units   Unit[]
+
+  @@map("label")
+}
+
+// An Unit is a 30 minute interval
+// Each day has 48 Units
+// They can be marked together with a Label
+model Unit {
   id         String @id @default(uuid())
   name       String
   start_time String
   end_time   String
 
-  day_id String
+  routine_id String
+  label_id   String?
 
-  day Day @relation(fields: [day_id], references: [id])
-  @@map("section")
+  routine Routine @relation(fields: [routine_id], references: [id])
+  label   Label?  @relation(fields: [label_id], references: [id])
+
+  @@map("unit")
 }
