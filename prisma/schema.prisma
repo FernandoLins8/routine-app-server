@@ -57,7 +57,7 @@ model Label {
 // They can be marked together with a Label
 model Unit {
   id         String @id @default(uuid())
-  name       String
+  count      Int
   start_time String
   end_time   String
 
