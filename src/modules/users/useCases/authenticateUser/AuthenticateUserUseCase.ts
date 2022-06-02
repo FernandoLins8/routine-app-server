@@ -23,7 +23,7 @@ export default class AuthenticateUseUseCase {
 
     const isPasswordCorrect = await compare(password, user.password)
     if (!isPasswordCorrect) {
-      throw new AppError('incorrect username or password')
+      throw new AppError('incorrect username or password', 401)
     }
 
     const token = sign({}, process.env.SECRET_KEY as string, {
