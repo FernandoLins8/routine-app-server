@@ -13,7 +13,9 @@ export default class InMemoryRoutinesRepository implements IRoutinesRepository {
       id,
       user_id,
       name: name ?? null,
-      created_at: new Date()
+      created_at: new Date(),
+      units: [],
+      label: []
     }
 
     this.routines.push(routine)
