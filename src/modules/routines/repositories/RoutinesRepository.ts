@@ -1,6 +1,7 @@
 import { Routine } from "@prisma/client";
 import prisma from "../../../database/prismaClient";
 import ICreateRoutineDTO from "../dtos/ICreateRoutineDTO";
+import IUpdateRoutineDTO from "../dtos/IUpdateRoutineDTO";
 import IRoutinesRepository from "./IRoutinesRepository";
 
 export default class RoutinesRepository implements IRoutinesRepository {
@@ -29,6 +30,17 @@ export default class RoutinesRepository implements IRoutinesRepository {
       include: {
         units: true,
         labels: true
+      }
+    })
+  }
+
+  async updateRoutine({ routine_id, name }: IUpdateRoutineDTO): Promise<Routine> {
+    return await prisma.routine.update({
+      where: {
+        id: routine_id
+      },
+      data: {
+        name: name
       }
     })
   }

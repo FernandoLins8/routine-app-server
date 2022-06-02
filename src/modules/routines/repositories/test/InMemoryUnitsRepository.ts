@@ -1,5 +1,6 @@
 import { Unit } from "@prisma/client";
 import { randomUUID } from "crypto";
+import IUpdateUnitsLabelsDTO from "../../dtos/IUpdateUnitsLabelsDTO";
 import IUnitsRepository from "../IUnitsRepository";
 
 export default class InMemoryUnitsRepository implements IUnitsRepository {
@@ -29,5 +30,12 @@ export default class InMemoryUnitsRepository implements IUnitsRepository {
         label_id: null
       })
     }
+  }
+
+  async updateLabelUnits({ routineId, labelId, units }: IUpdateUnitsLabelsDTO): Promise<void> {
+    this.units.filter(unit => unit.routine_id == routineId && units.includes(unit.count))
+      .forEach(unit => {
+        unit.label_id = labelId
+      })
   }
 }

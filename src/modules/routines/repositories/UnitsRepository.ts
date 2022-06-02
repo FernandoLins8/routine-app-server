@@ -1,4 +1,5 @@
 import prisma from "../../../database/prismaClient";
+import IUpdateUnitsLabelsDTO from "../dtos/IUpdateUnitsLabelsDTO";
 import IUnitsRepository from "./IUnitsRepository";
 
 export default class UnitsRepository implements IUnitsRepository {
@@ -26,5 +27,17 @@ export default class UnitsRepository implements IUnitsRepository {
         }
       })
     }
+  }
+
+  async updateLabelUnits({ routineId, labelId, units }: IUpdateUnitsLabelsDTO): Promise<void> {
+    await prisma.unit.updateMany({
+      data: {
+        label_id: labelId
+      },
+      where: {
+        routine_id: routineId,
+        count: { in: units }
+      }
+    })
   }
 }

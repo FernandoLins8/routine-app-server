@@ -1,6 +1,7 @@
 import { Routine } from "@prisma/client";
 import { randomUUID } from "crypto";
 import ICreateRoutineDTO from "../../dtos/ICreateRoutineDTO";
+import IUpdateRoutineDTO from "../../dtos/IUpdateRoutineDTO";
 import IRoutinesRepository from "../IRoutinesRepository";
 
 export default class InMemoryRoutinesRepository implements IRoutinesRepository {
@@ -29,5 +30,11 @@ export default class InMemoryRoutinesRepository implements IRoutinesRepository {
 
   async findRoutine(routineId: string): Promise<Routine | null> {
     return this.routines.find(routine => routine.id == routineId) ?? null
+  }
+
+  async updateRoutine({ routine_id, name }: IUpdateRoutineDTO): Promise<Routine> {
+    const routine = await this.findRoutine(routine_id) as Routine
+    routine.name = name ?? null
+    return routine
   }
 }
