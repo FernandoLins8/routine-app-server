@@ -14,7 +14,11 @@ export default class RoutinesRepository implements IRoutinesRepository {
   }
 
   async listRoutines(user_id: string): Promise<Routine[]> {
-    return await prisma.routine.findMany()
+    return await prisma.routine.findMany({
+      where: {
+        user_id
+      }
+    })
   }
 
   async findRoutine(routineId: string): Promise<Routine | null> {
