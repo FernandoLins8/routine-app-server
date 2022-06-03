@@ -309,6 +309,36 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "Delete routine",
+        "description": "Delete a routine and its related entities (labels and units)",
+        "parameters": [
+          {
+            "name": "routine_id",
+            "in": "path",
+            "description": "The id from the routine to be deleted",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "parameters": {
+              "name": "routine id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Routine not found"
+          }
+        }
       }
     }
   }
