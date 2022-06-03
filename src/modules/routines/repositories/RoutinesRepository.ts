@@ -44,4 +44,12 @@ export default class RoutinesRepository implements IRoutinesRepository {
       }
     })
   }
+
+  async deleteRoutine(routineId: string): Promise<void> {
+    await prisma.routine.delete({
+      where: {
+        id: routineId
+      }
+    })
+  }
 }

@@ -5,7 +5,7 @@ import IUpdateRoutineDTO from "../../dtos/IUpdateRoutineDTO";
 import IRoutinesRepository from "../IRoutinesRepository";
 
 export default class InMemoryRoutinesRepository implements IRoutinesRepository {
-  private routines: Routine[] = []
+  public routines: Routine[] = []
 
   async createRoutine({ user_id, name }: ICreateRoutineDTO): Promise<Routine> {
     const id = randomUUID()
@@ -36,5 +36,9 @@ export default class InMemoryRoutinesRepository implements IRoutinesRepository {
     const routine = await this.findRoutine(routine_id) as Routine
     routine.name = name ?? null
     return routine
+  }
+
+  async deleteRoutine(routineId: string): Promise<void> {
+    this.routines = this.routines.filter(routine => routine.id != routineId)
   }
 }

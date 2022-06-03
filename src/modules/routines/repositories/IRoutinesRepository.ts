@@ -7,4 +7,5 @@ export default interface IRoutinesRepository {
   listRoutines(user_id: string): Promise<Routine[]>
   findRoutine(routineId: string): Promise<Routine | null>
   updateRoutine(data: IUpdateRoutineDTO): Promise<Routine>
+  deleteRoutine(routineId: string): Promise<void>
 }
