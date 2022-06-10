@@ -28,8 +28,7 @@ export default class UpdateRoutineUseCase {
         })
 
         if (label.units) {
-          const newLabelUnits = label.units.split(',')
-            .map(label => Number(label.trim()))
+          const newLabelUnits = label.units
 
           await this.unitsRepository.updateLabelUnits({
             routineId: routine_id,

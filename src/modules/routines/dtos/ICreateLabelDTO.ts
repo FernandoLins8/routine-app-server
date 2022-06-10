@@ -7,5 +7,5 @@ export default interface ICreateLabelDTO {
 export type label = {
   name: string
   color: string
-  units?: string
+  units?: number[]
 }
