@@ -33,7 +33,7 @@ describe('Create Routine', () => {
     expect(routine.name).toBe('random name')
   })
 
-  it('should be able to create the 48 units when creating a routine', async () => {
+  it('should be able to create the 24 units when creating a routine', async () => {
     // restart units repository
     unitsRepository.units = []
 
@@ -53,6 +53,6 @@ describe('Create Routine', () => {
       name: 'routine 2'
     })
 
-    expect(unitsRepository.units.length).toBe(96) // 48 * 2
+    expect(unitsRepository.units.length).toBe(48) // 24 * 2
   })
 })
